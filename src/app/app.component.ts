@@ -1,9 +1,9 @@
-import { Component } from '@angular/core';
+import { Component, NgModule } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
 import { NaviComponent } from "./components/navi/navi.component";
 import { CategoryComponent } from "./components/category/category.component";
 import { ProductComponent } from "./components/product/product.component";
-
+import { HttpClientModule } from '@angular/common/http';
 
 @Component({
     selector: 'app-root',

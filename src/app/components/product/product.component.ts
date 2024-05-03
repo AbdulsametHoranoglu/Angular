@@ -1,21 +1,32 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { Product } from '../../models/Product';
-
-
+import { productResponseModel } from '../../models/productResponseModel';
+import { HttpClient } from '@angular/common/http';
+import { CommonModule } from '@angular/common';
 
 
 @Component({
   selector: 'app-product',
   standalone: true, 
-  imports: [],
+  imports: [CommonModule],
   templateUrl: './product.component.html',
   styleUrl: './product.component.css'
 })
-export class ProductComponent {
+export class ProductComponent implements OnInit{
 
   products:Product[ ]=[ ];
-  constructor() {}
+  apiUrl = "https://localhost:7087/api/products/getall"
 
-  ngOnInit(): void {} 
+  constructor(private httpClient:HttpClient) {}
+
+  ngOnInit(): void {
+    this.getProducts();
+  }
+  getProducts(){
+    this.httpClient.get<productResponseModel>(this.apiUrl)
+    .subscribe((response) => {
+      this.products= response.data
+    });
+  } 
 
 }
